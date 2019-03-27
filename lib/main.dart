@@ -73,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
             Padding(
-              padding: EdgeInsets.all(18.0),
+              padding: EdgeInsets.all(10.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -81,9 +81,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     onPressed: _left,
                     child: const Text('Left'),
                   ),
-                  RaisedButton(
-                    onPressed: _stop,
-                    child: const Text('Stop'),
+                  Container(
+                    margin: const EdgeInsets.only(left: 20.0, right: 20.0),
+                    child: RaisedButton(
+                      onPressed: _stop,
+                      child: const Text('Stop'),
+                    ),
                   ),
                   RaisedButton(
                     onPressed: _right,
