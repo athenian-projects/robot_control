@@ -25,32 +25,31 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
+void makeRestRequest(String direction) {
+  final String _prefix = "http://10.16.104.100:8080/";
+  HttpClient().getUrl(Uri.parse(_prefix + direction)).then((request) => request.close());
+}
+
 class _MyHomePageState extends State<MyHomePage> {
-  final String _prefix = "http://localhost:8080/";
 
-  void _forward() async {
-    var request = await HttpClient().getUrl(Uri.parse(_prefix + 'forward'));
-    await request.close();
+  void _forward() {
+    makeRestRequest('forward');
   }
 
-  void _backward() async {
-    var request = await HttpClient().getUrl(Uri.parse(_prefix + 'backward'));
-    await request.close();
+  void _backward() {
+    makeRestRequest('backward');
   }
 
-  void _left() async {
-    var request = await HttpClient().getUrl(Uri.parse(_prefix + 'left'));
-    await request.close();
+  void _left() {
+    makeRestRequest('left');
   }
 
-  void _right() async {
-    var request = await HttpClient().getUrl(Uri.parse(_prefix + 'right'));
-    await request.close();
+  void _right() {
+    makeRestRequest('right');
   }
 
-  void _stop() async {
-    var request = await HttpClient().getUrl(Uri.parse(_prefix + 'stop'));
-    await request.close();
+  void _stop() {
+    makeRestRequest('stop');
   }
 
   @override
