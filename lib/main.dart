@@ -242,9 +242,9 @@ class _MyHomePageState extends State<MyHomePage> {
           BottomNavigationBarItem(
               icon: Icon(Icons.launch), title: Text('IMU')),
           BottomNavigationBarItem(
-              icon: Icon(Icons.voice_chat), title: Text('Speach')),
+              icon: Icon(Icons.phone), title: Text('Speach')),
           BottomNavigationBarItem(
-              icon: Icon(Icons.video_label), title: Text('Video')),
+              icon: Icon(Icons.voice_chat), title: Text('Video')),
         ],
         currentIndex: _selectedIndex,
         fixedColor: Colors.deepOrange,
