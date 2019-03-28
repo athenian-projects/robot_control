@@ -2,13 +2,16 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:robot_control/widgets.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Center(child: myFancy());
     return MaterialApp(
+
       title: 'Robot Control',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -16,7 +19,7 @@ class MyApp extends StatelessWidget {
       home: MyHomePage(title: 'Robot Control'),
     );
   }
-}
+} //Center(child: MyFancy());
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -74,14 +77,22 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    // Center(child: myFancy());
+    // myFancy(colors.dark, colors.blue);
     return Scaffold(
+
       appBar: AppBar(
         title: Text(widget.title),
       ),
+//       body: Center(
+//        child: myLogoWidget(),
+//      )
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            //myLogoWidget(),
+            myFancy(),
             Container(
               margin: const EdgeInsets.only(bottom: 40.0),
               child: Row(
@@ -116,8 +127,14 @@ class _MyHomePageState extends State<MyHomePage> {
                         .display1,
                   ),
                 ],
-
               ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset('images/Logo2.png', width: 144.0, height: 96.0),
+                myLogoWidget()
+              ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -160,6 +177,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ],
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset('images/Logo1.png', width: 144.0, height: 96.0),
+
+              ],
+            ),
+
           ],
         ),
       ),
