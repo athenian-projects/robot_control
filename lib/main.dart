@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -25,31 +26,50 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-void makeRestRequest(String direction) {
-  final String _prefix = "http://10.16.104.100:8080/";
-  HttpClient().getUrl(Uri.parse(_prefix + direction)).then((request) => request.close());
-}
-
 class _MyHomePageState extends State<MyHomePage> {
+  final String _prefix = "http://10.16.104.100:8080/";
+
+  //final String _prefix = "http://ros.local:8080/";
+
+  var _linear = 0.0;
+  var _angular = 0.0;
+
+  void _makeRestRequest(String direction) async {
+    var request = await HttpClient().getUrl(Uri.parse(_prefix + direction));
+    var response = await request.close();
+    await for (var contents in response.transform(Utf8Decoder())) {
+      //print(contents);
+      if (contents
+          .trim()
+          .length > 0) {
+        var json = jsonDecode(contents);
+        //print(json);
+        setState(() {
+          _linear = json['linear'];
+          _angular = json['angular'];
+        });
+      }
+    }
+  }
 
   void _forward() {
-    makeRestRequest('forward');
+    _makeRestRequest('forward');
   }
 
   void _backward() {
-    makeRestRequest('backward');
+    _makeRestRequest('backward');
   }
 
   void _left() {
-    makeRestRequest('left');
+    _makeRestRequest('left');
   }
 
   void _right() {
-    makeRestRequest('right');
+    _makeRestRequest('right');
   }
 
   void _stop() {
-    makeRestRequest('stop');
+    _makeRestRequest('stop');
   }
 
   @override
@@ -62,6 +82,43 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Container(
+              margin: const EdgeInsets.only(bottom: 40.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'Linear: ',
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .display1,
+                  ),
+                  Text(
+                    '$_linear',
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .display1,
+                  ),
+                  Text(
+                    '  Angular: ',
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .display1,
+                  ),
+                  Text(
+                    '$_angular',
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .display1,
+                  ),
+                ],
+
+              ),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
