@@ -27,9 +27,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  //final String _prefix = "http://10.16.104.100:8080/";
+  final String _prefix = "http://10.16.104.100:8080/";
 
-  final String _prefix = "http://ros.local:8080/";
+  //final String _prefix = "http://ros.local:8080/";
 
   var _linear = 0.0;
   var _angular = 0.0;
@@ -92,28 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    'Linear: ',
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .display1,
-                  ),
-                  Text(
-                    '$_linear',
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .display1,
-                  ),
-                  Text(
-                    '  Angular: ',
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .display1,
-                  ),
-                  Text(
-                    '${_angular != 0.0 ? -1 * _angular : _angular}',
+                    'Linear: $_linear  Angular: ${_angular != 0.0 ? -1 * _angular : _angular}',
                     style: Theme
                         .of(context)
                         .textTheme
