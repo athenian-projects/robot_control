@@ -3,6 +3,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
+import 'settings.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -35,6 +37,10 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _selectedIndex = index;
     });
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Settings()),
+    );
   }
 
   final _widgetOptions = [
@@ -128,9 +134,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   Slider(
                     activeColor: Colors.indigoAccent,
                     label: "Linear",
-                    min: -0.5,
-                    max: 0.5,
-                    divisions: 10,
+                    min: -1,
+                    max: 1,
+                    divisions: 20,
                     onChangeStart: (newVal) => _lastLinear = _linear,
                     onChanged: (newVal) {
                       if (newVal != _lastLinear) {
@@ -143,9 +149,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   Slider(
                     activeColor: Colors.indigoAccent,
                     label: "Angular",
-                    min: -0.5,
-                    max: 0.5,
-                    divisions: 10,
+                    min: -1,
+                    max: 1,
+                    divisions: 20,
                     onChangeStart: (newVal) => _lastAngular = _angular,
                     onChanged: (newVal) {
                       if (newVal != _lastAngular) {
