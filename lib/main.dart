@@ -9,7 +9,7 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Center(child: myFancy());
+    // Center(child: myFancy());
     return MaterialApp(
 
       title: 'Robot Control',
@@ -78,26 +78,44 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     // Center(child: myFancy());
-    // myFancy(colors.dark, colors.blue);
     return Scaffold(
 
       appBar: AppBar(
         title: Text(widget.title),
+        backgroundColor: Colors.orangeAccent,
       ),
 //       body: Center(
 //        child: myLogoWidget(),
 //      )
+
       body: Center(
+
         child: Column(
+
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            //myLogoWidget(),
-            myFancy(),
             Container(
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topRight,
+                    end: Alignment.bottomLeft,
+                    stops: [0.1, 0.5, 0.7, 0.9],
+                    colors: [
+
+                      Colors.deepPurple[800],
+                      Colors.purple[700],
+                      Colors.blue[600],
+                      Colors.indigo[400],
+                    ],
+                  )
+              ),
+
               margin: const EdgeInsets.only(bottom: 40.0),
               child: Row(
+
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
+
                   Text(
                     'Linear: ',
                     style: Theme
@@ -128,6 +146,22 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ],
               ),
+
+//              decoration: BoxDecoration(
+//                  gradient: LinearGradient(
+//                    begin: Alignment.topRight,
+//                    end: Alignment.bottomLeft,
+//                    stops: [0.1, 0.5, 0.7, 0.9],
+//                    colors: [
+//                      // Colors are easy thanks to Flutter's Colors class.
+//                      Colors.red[800],
+//                      Colors.indigo[700],
+//                      Colors.blue[600],
+//                      Colors.blue[400],
+//                    ],
+//                  )
+//              ),
+
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -160,6 +194,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       onPressed: _stop,
                       child: const Text('Stop'),
                     ),
+
                   ),
                   RaisedButton(
                     onPressed: _right,
@@ -186,8 +221,12 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
 
           ],
+
         ),
       ),
+      backgroundColor: Colors.white70,
+
+
     );
   }
 }
