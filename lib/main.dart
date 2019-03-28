@@ -33,9 +33,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
   var _linear = 0.0;
   var _angular = 0.0;
+  var _lastLinear = 0.0;
+  var _lastAngular = 0.0;
 
   void _makeAbsoluteRequest(String type, double val) async {
-    var request = await HttpClient().getUrl(Uri.parse(_prefix + type + "/" + val.toString()));
+    var uri = _prefix + type + "?val=" + val.toStringAsPrecision(1);
+    //print(uri);
+    var request = await HttpClient().getUrl(Uri.parse(uri));
     var response = await request.close();
     await for (var contents in response.transform(Utf8Decoder())) {
       try {
@@ -53,11 +57,14 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _makeRelativeRequest(String direction) async {
-    var request = await HttpClient().getUrl(Uri.parse(_prefix + direction));
+    var uri = Uri.parse(_prefix + direction);
+    //print(uri);
+    var request = await HttpClient().getUrl(uri);
     var response = await request.close();
     await for (var contents in response.transform(Utf8Decoder())) {
       try {
         var json = jsonDecode(contents);
+        print(json);
         setState(() {
           _linear = json['linear'];
           _angular = json['angular'];
@@ -106,7 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         .display1,
                   ),
                   Text(
-                    '$_angular',
+                    '${_angular != 0.0 ? -1 * _angular : _angular}',
                     style: Theme
                         .of(context)
                         .textTheme
@@ -126,8 +133,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     min: -0.5,
                     max: 0.5,
                     divisions: 10,
+                    onChangeStart: (newVal) => _lastLinear = _linear,
                     onChanged: (newVal) {
-                      if (newVal != _linear) _makeAbsoluteRequest("linear", newVal);
+                      if (newVal != _lastLinear) {
+                        _makeAbsoluteRequest("linear", newVal);
+                        _lastLinear = newVal;
+                      }
                     },
                     value: _linear,
                   ),
@@ -137,10 +148,14 @@ class _MyHomePageState extends State<MyHomePage> {
                     min: -0.5,
                     max: 0.5,
                     divisions: 10,
+                    onChangeStart: (newVal) => _lastAngular = _angular,
                     onChanged: (newVal) {
-                      if (newVal != _angular) _makeAbsoluteRequest("angular", newVal);
+                      if (newVal != _lastAngular) {
+                        _makeAbsoluteRequest("angular", newVal != 0.0 ? -1 * newVal : newVal);
+                        _lastAngular = newVal;
+                      }
                     },
-                    value: _angular,
+                    value: -1 * _angular,
                   ),
                 ],
               ),
