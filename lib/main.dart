@@ -3,7 +3,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
-import 'settings.dart';
+import 'imu.dart';
+import 'joystick.dart';
+import 'speach.dart';
+import 'videoStream.dart';
 
 void main() => runApp(MyApp());
 
@@ -37,10 +40,31 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _selectedIndex = index;
     });
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => Settings()),
-    );
+    if (_selectedIndex == 1) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => Joystick()),
+      );
+    }
+    if (_selectedIndex == 2) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => IMU()),
+      );
+    }
+    if (_selectedIndex == 4) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => VideoStream()),
+      );
+    }
+    if (_selectedIndex == 3) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => Speach()),
+      );
+    }
+
   }
 
   final _widgetOptions = [
@@ -213,9 +237,13 @@ class _MyHomePageState extends State<MyHomePage> {
           BottomNavigationBarItem(
               icon: Icon(Icons.home), title: Text('Control')),
           BottomNavigationBarItem(
-              icon: Icon(Icons.video_label), title: Text('Video Feed')),
+              icon: Icon(Icons.videogame_asset), title: Text('Joystick')),
           BottomNavigationBarItem(
-              icon: Icon(Icons.settings), title: Text('Settings')),
+              icon: Icon(Icons.launch), title: Text('IMU')),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.voice_chat), title: Text('Speach')),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.video_label), title: Text('Video')),
         ],
         currentIndex: _selectedIndex,
         fixedColor: Colors.deepOrange,

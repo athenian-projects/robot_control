@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class Settings extends StatelessWidget {
+class VideoStream extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Settings"),
+        title: Text("Video Stream"),
       ),
       body: Center(),
     );
