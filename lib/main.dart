@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Robot Control'),
+      home: MyHomePage(title: 'Button Control'),
     );
   }
 }
@@ -233,6 +233,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
               icon: Icon(Icons.home), title: Text('Control')),
@@ -252,3 +253,4 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
