@@ -21,16 +21,33 @@ class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
   final String title;
 
+
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
+
 
 void makeRestRequest(String direction) {
   final String _prefix = "http://10.16.104.100:8080/";
   HttpClient().getUrl(Uri.parse(_prefix + direction)).then((request) => request.close());
 }
 
+
 class _MyHomePageState extends State<MyHomePage> {
+
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  final _widgetOptions = [
+    Text('Index 0: Control'),
+    Text('Index 1: Video Feed'),
+    Text('Index 2: Settings'),
+  ];
 
   void _forward() {
     makeRestRequest('forward');
@@ -59,6 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
+
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -106,6 +124,20 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+              icon: Icon(Icons.home), title: Text('Control')),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.video_label), title: Text('Video Feed')),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.settings), title: Text('Settings')),
+        ],
+        currentIndex: _selectedIndex,
+        fixedColor: Colors.deepOrange,
+        onTap: _onItemTapped,
+      ),
     );
   }
 }
+
