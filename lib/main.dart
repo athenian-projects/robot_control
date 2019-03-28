@@ -27,49 +27,46 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final String _prefix = "http://10.16.104.100:8080/";
+  //final String _prefix = "http://10.16.104.100:8080/";
 
-  //final String _prefix = "http://ros.local:8080/";
+  final String _prefix = "http://ros.local:8080/";
 
   var _linear = 0.0;
   var _angular = 0.0;
 
-  void _makeRestRequest(String direction) async {
-    var request = await HttpClient().getUrl(Uri.parse(_prefix + direction));
+  void _makeAbsoluteRequest(String type, double val) async {
+    var request = await HttpClient().getUrl(Uri.parse(_prefix + type + "/" + val.toString()));
     var response = await request.close();
     await for (var contents in response.transform(Utf8Decoder())) {
-      //print(contents);
-      if (contents
-          .trim()
-          .length > 0) {
+      try {
         var json = jsonDecode(contents);
-        //print(json);
+        print(json);
         setState(() {
           _linear = json['linear'];
           _angular = json['angular'];
         });
       }
+      on FormatException {
+        // Ignore
+      }
     }
   }
 
-  void _forward() {
-    _makeRestRequest('forward');
-  }
-
-  void _backward() {
-    _makeRestRequest('backward');
-  }
-
-  void _left() {
-    _makeRestRequest('left');
-  }
-
-  void _right() {
-    _makeRestRequest('right');
-  }
-
-  void _stop() {
-    _makeRestRequest('stop');
+  void _makeRelativeRequest(String direction) async {
+    var request = await HttpClient().getUrl(Uri.parse(_prefix + direction));
+    var response = await request.close();
+    await for (var contents in response.transform(Utf8Decoder())) {
+      try {
+        var json = jsonDecode(contents);
+        setState(() {
+          _linear = json['linear'];
+          _angular = json['angular'];
+        });
+      }
+      on FormatException {
+        // Ignore
+      }
+    }
   }
 
   @override
@@ -116,14 +113,43 @@ class _MyHomePageState extends State<MyHomePage> {
                         .display1,
                   ),
                 ],
-
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(bottom: 40.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Slider(
+                    activeColor: Colors.indigoAccent,
+                    label: "Linear",
+                    min: -0.5,
+                    max: 0.5,
+                    divisions: 10,
+                    onChanged: (newVal) {
+                      if (newVal != _linear) _makeAbsoluteRequest("linear", newVal);
+                    },
+                    value: _linear,
+                  ),
+                  Slider(
+                    activeColor: Colors.indigoAccent,
+                    label: "Angular",
+                    min: -0.5,
+                    max: 0.5,
+                    divisions: 10,
+                    onChanged: (newVal) {
+                      if (newVal != _angular) _makeAbsoluteRequest("angular", newVal);
+                    },
+                    value: _angular,
+                  ),
+                ],
               ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 RaisedButton(
-                  onPressed: _forward,
+                  onPressed: () => _makeRelativeRequest('forward'),
                   child: const Text('Forward'),
                 ),
               ],
@@ -134,18 +160,18 @@ class _MyHomePageState extends State<MyHomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   RaisedButton(
-                    onPressed: _left,
+                    onPressed: () => _makeRelativeRequest('left'),
                     child: const Text('Left'),
                   ),
                   Container(
                     margin: const EdgeInsets.only(left: 20.0, right: 20.0),
                     child: RaisedButton(
-                      onPressed: _stop,
+                      onPressed: () => _makeRelativeRequest('stop'),
                       child: const Text('Stop'),
                     ),
                   ),
                   RaisedButton(
-                    onPressed: _right,
+                    onPressed: () => _makeRelativeRequest('right'),
                     child: const Text('Right'),
                   ),
                 ],
@@ -155,7 +181,7 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 RaisedButton(
-                  onPressed: _backward,
+                  onPressed: () => _makeRelativeRequest('backward'),
                   child: const Text('Backward'),
                 ),
               ],
