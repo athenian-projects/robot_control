@@ -53,42 +53,31 @@ class _MyHomePageState extends State<MyHomePage> {
 
     switch (_selectedIndex) {
       case 1:
-        {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Joystick()),
-          );
-        }
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Joystick()),
+        );
         break;
       case 2:
-        {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => IMU()),
-          );
-        }
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => IMU()),
+        );
         break;
       case 3:
-        {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Speach()),
-          );
-        }
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Speach()),
+        );
         break;
       case 4:
-        {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => VideoStream()),
-          );
-          break;
-        }
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => VideoStream()),
+        );
         break;
       default:
-        {
           throw StateError("You clicked a Button that doesnt exist!");
-        }
     }
   }
 
