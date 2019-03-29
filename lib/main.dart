@@ -52,6 +52,8 @@ class _MyHomePageState extends State<MyHomePage> {
     });
 
     switch (_selectedIndex) {
+      case 0:
+        break;
       case 1:
         Navigator.push(
           context,
