@@ -32,7 +32,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   //Navigation Bar
   int _selectedIndex = 0;
 
@@ -83,48 +82,65 @@ class _MyHomePageState extends State<MyHomePage> {
             context,
             MaterialPageRoute(builder: (context) => VideoStream()),
           );
+          break;
+        }
+        break;
+      default:
+        {
+          throw StateError("You clicked a Button that doesnt exist!");
         }
     }
-
   }
 
   void _makeAbsoluteRequest(String type, double val) async {
     var uri = _prefix + type + "?val=" + val.toStringAsPrecision(1);
     //print(uri);
-    var request = await HttpClient().getUrl(Uri.parse(uri));
-    var response = await request.close();
-    await for (var contents in response.transform(Utf8Decoder())) {
-      try {
-        var json = jsonDecode(contents);
-        print(json);
-        setState(() {
-          _linear = json['linear'];
-          _angular = json['angular'];
-        });
+
+    try {
+      var request = await HttpClient().getUrl(Uri.parse(uri));
+      var response = await request.close();
+      await for (var contents in response.transform(Utf8Decoder())) {
+        try {
+          var json = jsonDecode(contents);
+          print(json);
+          setState(() {
+            _linear = json['linear'];
+            _angular = json['angular'];
+          });
+        }
+        on FormatException {
+          // Ignore
+        }
       }
-      on FormatException {
-        // Ignore
-      }
+    }
+    catch (e) {
+      print(e);
     }
   }
 
   void _makeRelativeRequest(String direction) async {
     var uri = Uri.parse(_prefix + direction);
     //print(uri);
-    var request = await HttpClient().getUrl(uri);
-    var response = await request.close();
-    await for (var contents in response.transform(Utf8Decoder())) {
-      try {
-        var json = jsonDecode(contents);
-        print(json);
-        setState(() {
-          _linear = json['linear'];
-          _angular = json['angular'];
-        });
+
+    try {
+      var request = await HttpClient().getUrl(uri);
+      var response = await request.close();
+      await for (var contents in response.transform(Utf8Decoder())) {
+        try {
+          var json = jsonDecode(contents);
+          print(json);
+          setState(() {
+            _linear = json['linear'];
+            _angular = json['angular'];
+          });
+        }
+        on FormatException {
+          // Ignore
+        }
       }
-      on FormatException {
-        // Ignore
-      }
+    }
+    catch (e) {
+      print(e);
     }
   }
 
@@ -238,16 +254,11 @@ class _MyHomePageState extends State<MyHomePage> {
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-              icon: Icon(Icons.home), title: Text('Control')),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.videogame_asset), title: Text('Joystick')),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.launch), title: Text('IMU')),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.phone), title: Text('Speach')),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.voice_chat), title: Text('Video')),
+          BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Control')),
+          BottomNavigationBarItem(icon: Icon(Icons.videogame_asset), title: Text('Joystick')),
+          BottomNavigationBarItem(icon: Icon(Icons.launch), title: Text('IMU')),
+          BottomNavigationBarItem(icon: Icon(Icons.phone), title: Text('Speach')),
+          BottomNavigationBarItem(icon: Icon(Icons.voice_chat), title: Text('Video')),
         ],
         currentIndex: _selectedIndex,
         fixedColor: Colors.deepOrange,
@@ -256,4 +267,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
