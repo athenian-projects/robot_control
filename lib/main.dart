@@ -2,10 +2,10 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:robot_control/speech.dart';
 
-import 'Joystick_Main.dart';
 import 'imu.dart';
-import 'speech.dart';
+import 'joystick.dart';
 import 'videoStream.dart';
 
 void main() => runApp(MyApp());
@@ -52,10 +52,12 @@ class _MyHomePageState extends State<MyHomePage> {
     });
 
     switch (_selectedIndex) {
+      case 0:
+        break;
       case 1:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => TouchTest()),
+          MaterialPageRoute(builder: (context) => TestForm()),
         );
         break;
       case 2:
@@ -67,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
       case 3:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Speach()),
+          MaterialPageRoute(builder: (context) => VoiceHome()),
         );
         break;
       case 4:
