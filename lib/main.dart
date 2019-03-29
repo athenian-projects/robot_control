@@ -84,6 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
             MaterialPageRoute(builder: (context) => VideoStream()),
           );
         }
+        break;
       default:
         {
           throw StateError("You clicked a Button that doesnt exist!");
