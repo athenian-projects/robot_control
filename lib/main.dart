@@ -36,10 +36,22 @@ class _MyHomePageState extends State<MyHomePage> {
   //Navigation Bar
   int _selectedIndex = 0;
 
+  final String _prefix = "http://10.16.104.100:8080/";
+
+  //Posotranics
+  //final String _prefix = "http://192.168.1.182:8080/";
+  //final String _prefix = "http://ros.local:8080/";
+
+  var _linear = 0.0;
+  var _angular = 0.0;
+  var _lastLinear = 0.0;
+  var _lastAngular = 0.0;
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
+
     if (_selectedIndex == 1) {
       Navigator.push(
         context,
@@ -64,26 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
         MaterialPageRoute(builder: (context) => Speach()),
       );
     }
-
   }
-
-  final _widgetOptions = [
-    Text('Index 0: Control'),
-    Text('Index 1: Video Feed'),
-    Text('Index 2: Settings'),
-  ];
-
-  final String _prefix = "http://10.16.104.100:8080/";
-
-  //Posotranics
-  //final String _prefix = "http://192.168.1.182:8080/";
-
-  //final String _prefix = "http://ros.local:8080/";
-
-  var _linear = 0.0;
-  var _angular = 0.0;
-  var _lastLinear = 0.0;
-  var _lastAngular = 0.0;
 
   void _makeAbsoluteRequest(String type, double val) async {
     var uri = _prefix + type + "?val=" + val.toStringAsPrecision(1);
