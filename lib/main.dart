@@ -52,30 +52,40 @@ class _MyHomePageState extends State<MyHomePage> {
       _selectedIndex = index;
     });
 
-    if (_selectedIndex == 1) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => Joystick()),
-      );
+    switch (_selectedIndex) {
+      case 1:
+        {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Joystick()),
+          );
+        }
+        break;
+      case 2:
+        {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => IMU()),
+          );
+        }
+        break;
+      case 3:
+        {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Speach()),
+          );
+        }
+        break;
+      case 4:
+        {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => VideoStream()),
+          );
+        }
     }
-    if (_selectedIndex == 2) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => IMU()),
-      );
-    }
-    if (_selectedIndex == 4) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => VideoStream()),
-      );
-    }
-    if (_selectedIndex == 3) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => Speach()),
-      );
-    }
+
   }
 
   void _makeAbsoluteRequest(String type, double val) async {
