@@ -77,9 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
         );
         break;
       default:
-        {
           throw StateError("You clicked a Button that doesnt exist!");
-        }
     }
   }
 
