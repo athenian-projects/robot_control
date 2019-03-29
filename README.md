@@ -2,11 +2,13 @@
 
 A Flutter app for controlling a ROS robot.
 
-## Things left to do
+## Things To Do
 
 - [ ] Name the app
 - [ ] Add Athenian Icon to background
 - [ ] Add color gradient background
-- [ ] Add bottom navigation
-- [ ] Stub out voice control
+- [x] Add bottom navigation
+- [x] Stub out voice control
 - [ ] Stub out IMU control
+- [ ] Settings page
+- [ ] http server dropdown on settings
