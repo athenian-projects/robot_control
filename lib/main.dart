@@ -55,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
       case 1:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Joystick()),
+          MaterialPageRoute(builder: (context) => TestForm()),
         );
         break;
       case 2:

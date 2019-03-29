@@ -1,13 +1,11 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-
 
 /**
  * Steteful widget
  */
 class TouchPad extends StatefulWidget {
-
   final ValueChanged<Offset> onChanged;
 
   const TouchPad({Key key, this.onChanged}) : super(key: key);
@@ -27,8 +25,7 @@ class TouchPadState extends State<TouchPad> {
   void onChanged(Offset offset) {
     final RenderBox referenceBox = context.findRenderObject();
     Offset position = referenceBox.globalToLocal(offset);
-    if (widget.onChanged != null)
-      widget.onChanged(position);
+    if (widget.onChanged != null) widget.onChanged(position);
 
     double width = referenceBox.size.width;
     double height = referenceBox.size.height;
@@ -36,27 +33,27 @@ class TouchPadState extends State<TouchPad> {
     double x = position.dx;
     double y = position.dy;
 
-    var xFinal = (x/(width/9)).round();
-    var yFinal = (y/(height/9)).round();
+    var xFinal = (x / (width / 9)).round();
+    var yFinal = (y / (height / 9)).round();
 
     if (xFinal > 9) {
       xFinal = 10;
-    } else {
-    }
+      xPos = 10;
+    } else {}
 
     if (xFinal < 1) {
       xFinal = 0;
-    } else {
-    }
+      xPos = 0;
+    } else {}
 
     if (yFinal > 9) {
       yFinal = 10;
-    } else  {
-    }
+      yPos = 10;
+    } else {}
     if (yFinal < 1) {
       yFinal = 0;
-    } else  {
-    }
+      yPos = 0;
+    } else {}
 
     print('x:$xFinal:$width, y:$yFinal:$height');
 
@@ -72,7 +69,7 @@ class TouchPadState extends State<TouchPad> {
 
   @override
   void handleEvent(PointerEvent event, BoxHitTestEntry entry) {
-    if (event is PointerDownEvent ) {
+    if (event is PointerDownEvent) {
       //
     }
   }
@@ -94,14 +91,14 @@ class TouchPadState extends State<TouchPad> {
     return new ConstrainedBox(
       constraints: new BoxConstraints.expand(),
       child: new GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onPanStart:_handlePanStart,
+        behavior: HitTestBehavior.translucent,
+        onPanStart: _handlePanStart,
         onPanEnd: _handlePanEnd,
         onPanUpdate: _handlePanUpdate,
         child: new CustomPaint(
           painter: new TouchPadGridPainter(),
           child: new Center(
-            child:new CustomPaint(
+            child: new CustomPaint(
               painter: new TouchPadPainter(xPos, yPos),
             ),
           ),
@@ -116,7 +113,7 @@ class TouchPadState extends State<TouchPad> {
  *
  */
 class TouchPadPainter extends CustomPainter {
-  static const markerRadius = 10.0;
+  static const markerRadius = 30.0;
 
   Offset position;
 
@@ -127,16 +124,16 @@ class TouchPadPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = new Paint()
-      ..color = Colors.blue[400]
+      ..color = Colors.blueGrey[400]
       ..style = PaintingStyle.fill;
 
-
-    canvas.drawCircle(new Offset(position.dx, position.dy), markerRadius, paint);
+    canvas.drawCircle(
+        new Offset(position.dx, position.dy), markerRadius, paint);
   }
 
-
   @override
-  bool shouldRepaint(TouchPadPainter old) => position.dx != old.position.dx && position.dy !=old.position.dy;
+  bool shouldRepaint(TouchPadPainter old) =>
+      position.dx != old.position.dx && position.dy != old.position.dy;
 }
 
 /**
@@ -144,7 +141,6 @@ class TouchPadPainter extends CustomPainter {
  *
  */
 class TouchPadGridPainter extends CustomPainter {
-
   Offset position;
 
   TouchPadGridPainter() {
@@ -168,7 +164,7 @@ class TouchPadGridPainter extends CustomPainter {
     canvas.drawLine(topCentre, bottomCentre, paint);
   }
 
-
   @override
-  bool shouldRepaint(TouchPadGridPainter old) => position.dx != old.position.dx && position.dy !=old.position.dy;
+  bool shouldRepaint(TouchPadGridPainter old) =>
+      position.dx != old.position.dx && position.dy != old.position.dy;
 }
