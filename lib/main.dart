@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
 
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -121,9 +122,38 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   //Navigation Bar
   int _selectedIndex = 0;
-
   final String _prefix = "http://10.16.104.100:8080/";
 
+  AlertDialog _connectionError() =>
+      new AlertDialog(
+        title: new Text('Error'),
+        content: new Text('Connection Failed!'),
+        actions: <Widget>[
+          new MaterialButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: new Text('Cancel'),
+          ),
+          new MaterialButton(
+              onPressed: () {
+                setState(() {});
+                Navigator.pop(context);
+              },
+              child: new Text('OK')),
+        ],
+      );
+
+  void _error() {
+    if (true) {
+      showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            return _connectionError();
+          });
+    }
+  }
   //Posotranics
   //final String _prefix = "http://192.168.1.182:8080/";
   //final String _prefix = "http://ros.local:8080/";
@@ -132,6 +162,7 @@ class _MyHomePageState extends State<MyHomePage> {
   var _angular = 0.0;
   var _lastLinear = 0.0;
   var _lastAngular = 0.0;
+
 
   void _onItemTapped(int index) {
     setState(() {
@@ -192,6 +223,9 @@ class _MyHomePageState extends State<MyHomePage> {
       }
     }
     catch (e) {
+      _error();
+
+
       print(e);
     }
   }
@@ -218,32 +252,11 @@ class _MyHomePageState extends State<MyHomePage> {
       }
     }
     catch (e) {
-      _linear = 0.0;
-      _angular = 0.0;
-      AlertDialog _createMaterialAlertDialog() =>
-          new AlertDialog(
-            title: new Text("You have error: ${e.toString()}"),
-            content: new Text('Ok'),
-            actions: <Widget>[
-              new MaterialButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: new Text('Cancel'),
-              ),
-              new MaterialButton(
-                  onPressed: () {
-                    setState(() {
-                      // make linear and angular set to 0
-                    });
-                    Navigator.pop(context);
-                  },
-                  child: new Text('OK')),
-            ],
-          );
+      _error();
       print(e);
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -331,12 +344,14 @@ class _MyHomePageState extends State<MyHomePage> {
                     margin: const EdgeInsets.only(left: 20.0, right: 20.0),
                     child: RaisedButton(
                       onPressed: () => _makeRelativeRequest('stop'),
+
                       child: const Text('Stop'),
                     ),
                   ),
                   RaisedButton(
                     onPressed: () => _makeRelativeRequest('right'),
                     child: const Text('Right'),
+
                   ),
                 ],
               ),
