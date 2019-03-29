@@ -3,11 +3,12 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:robot_control/speech.dart';
 
 import 'imu.dart';
 import 'joystick.dart';
 import 'videoStream.dart';
+//import 'package:robot_control/speech.dart';
+
 
 void main() => runApp(MyApp());
 
@@ -21,7 +22,6 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         home: SplashScreen()
-
     );
   }
 }
@@ -192,7 +192,7 @@ class _MyHomePageState extends State<MyHomePage> {
       case 3:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => VoiceHome()),
+          MaterialPageRoute(builder: (context) => IMU()),
         );
         break;
       case 4:
