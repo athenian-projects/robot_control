@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'imu.dart';
 import 'joystick.dart';
-import 'speach.dart';
+import 'speech.dart';
 import 'videoStream.dart';
 
 void main() => runApp(MyApp());
