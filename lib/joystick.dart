@@ -33,7 +33,6 @@ class _TestForm extends State<TestForm> {
               new Expanded(
                   flex: 2,
                   child: touchControl()
-
               ),
               new Expanded(
                 flex: 1,
