@@ -3,6 +3,11 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:robot_control/speech.dart';
+
+import 'imu.dart';
+import 'joystick.dart';
+import 'videoStream.dart';
 
 void main() => runApp(MyApp());
 
