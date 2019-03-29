@@ -11,7 +11,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>robot_control</string>
+	<string>app</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -41,10 +41,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-
-	<key>NSMicrophoneUsageDescription</key>
-    <string>This application needs to access your microphone</string>
-    <key>NSSpeechRecognitionUsageDescription</key>
-    <string>This application needs the speech recognition permission</string>
 </dict>
 </plist>
