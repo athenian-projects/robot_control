@@ -5,7 +5,7 @@ class Speach extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Speach Control"),
+        title: Text("Speech Control"),
       ),
       body: Center(),
     );
