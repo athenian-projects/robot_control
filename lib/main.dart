@@ -2,10 +2,10 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:robot_control/speech.dart';
 
 import 'imu.dart';
 import 'joystick.dart';
-import 'speech.dart';
 import 'videoStream.dart';
 
 void main() => runApp(MyApp());
@@ -69,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
       case 3:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Speach()),
+          MaterialPageRoute(builder: (context) => VoiceHome()),
         );
         break;
       case 4:

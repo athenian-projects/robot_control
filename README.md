@@ -12,3 +12,9 @@ A Flutter app for controlling a ROS robot.
 - [ ] Stub out IMU control
 - [ ] Settings page
 - [ ] http server dropdown on settings
+
+## Dependencies
+
+Add these dependencies in the pubspec.yaml file.
+
+* speech_recognition: "^0.3.0"
