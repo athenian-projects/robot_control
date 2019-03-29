@@ -38,7 +38,7 @@ class TouchPadState extends State<TouchPad> {
 
     if (xFinal > 9) {
       xFinal = 10;
-      xPos = 10;
+      x = 384;
     } else {}
 
     if (xFinal < 1) {
@@ -48,7 +48,7 @@ class TouchPadState extends State<TouchPad> {
 
     if (yFinal > 9) {
       yFinal = 10;
-      yPos = 10;
+      y = 433;
     } else {}
     if (yFinal < 1) {
       yFinal = 0;
@@ -113,7 +113,7 @@ class TouchPadState extends State<TouchPad> {
  *
  */
 class TouchPadPainter extends CustomPainter {
-  static const markerRadius = 30.0;
+  static const markerRadius = 50.0;
 
   Offset position;
 
