@@ -7,7 +7,7 @@ class IMU extends StatelessWidget {
       appBar: AppBar(
         title: Text("IMU Control"),
       ),
-      body: Center(),
+      body: Center(child: Text("IMU")),
     );
   }
 }
