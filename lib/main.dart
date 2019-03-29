@@ -129,7 +129,31 @@ class _MyHomePageState extends State<MyHomePage> {
       }
     }
     catch (e) {
+      _linear = 0.0;
+      _angular = 0.0;
+      AlertDialog _createMaterialAlertDialog() =>
+          new AlertDialog(
+            title: new Text("You have error: ${e.toString()}"),
+            content: new Text('Ok'),
+            actions: <Widget>[
+              new MaterialButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: new Text('Cancel'),
+              ),
+              new MaterialButton(
+                  onPressed: () {
+                    setState(() {
+                      // make linear and angular set to 0
+                    });
+                    Navigator.pop(context);
+                  },
+                  child: new Text('OK')),
+            ],
+          );
       print(e);
+
     }
   }
 
@@ -159,6 +183,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             Container(
+
               margin: const EdgeInsets.only(bottom: 40.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -246,7 +271,8 @@ class _MyHomePageState extends State<MyHomePage> {
           BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Control')),
           BottomNavigationBarItem(icon: Icon(Icons.videogame_asset), title: Text('Joystick')),
           BottomNavigationBarItem(icon: Icon(Icons.launch), title: Text('IMU')),
-          BottomNavigationBarItem(icon: Icon(Icons.phone), title: Text('Speach')),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.phone), title: Text('Speech')),
           BottomNavigationBarItem(icon: Icon(Icons.voice_chat), title: Text('Video')),
         ],
         currentIndex: _selectedIndex,
