@@ -93,7 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
       if (_angular == 0.0) {
         _angular = 0.0;
       } else {
-        _angular = _angular + 0.1;
+        _angular = _angular - 0.1;
       }
     });
   }
