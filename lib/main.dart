@@ -9,7 +9,6 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // Center(child: myFancy());
     return MaterialApp(
 
       title: 'Robot Control',
@@ -147,20 +146,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
 
-//              decoration: BoxDecoration(
-//                  gradient: LinearGradient(
-//                    begin: Alignment.topRight,
-//                    end: Alignment.bottomLeft,
-//                    stops: [0.1, 0.5, 0.7, 0.9],
-//                    colors: [
-//                      // Colors are easy thanks to Flutter's Colors class.
-//                      Colors.red[800],
-//                      Colors.indigo[700],
-//                      Colors.blue[600],
-//                      Colors.blue[400],
-//                    ],
-//                  )
-//              ),
 
             ),
             Row(
@@ -176,6 +161,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 RaisedButton(
                   onPressed: _forward,
                   child: const Text('Forward'),
+                  color: Colors.greenAccent,
+                  //Theme.of(context).accentColor,
+                  elevation: 9.0,
+                  splashColor: Colors.green,
                 ),
               ],
             ),
@@ -187,19 +176,33 @@ class _MyHomePageState extends State<MyHomePage> {
                   RaisedButton(
                     onPressed: _left,
                     child: const Text('Left'),
+                    color: Colors.greenAccent,
+                    //Theme.of(context).accentColor,
+                    elevation: 9.0,
+                    splashColor: Colors.green,
+
                   ),
                   Container(
                     margin: const EdgeInsets.only(left: 20.0, right: 20.0),
                     child: RaisedButton(
                       onPressed: _stop,
                       child: const Text('Stop'),
+                      color: Colors.redAccent,
+                      //Theme.of(context).accentColor,
+                      elevation: 9.0,
+                      splashColor: Colors.red,
                     ),
 
                   ),
                   RaisedButton(
                     onPressed: _right,
                     child: const Text('Right'),
+                    color: Colors.greenAccent,
+                    //Theme.of(context).accentColor,
+                    elevation: 9.0,
+                    splashColor: Colors.greenAccent,
                   ),
+
                 ],
               ),
             ),
@@ -209,6 +212,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 RaisedButton(
                   onPressed: _backward,
                   child: const Text('Backward'),
+                  color: Colors.greenAccent,
+                  //Theme.of(context).accentColor,
+                  elevation: 9.0,
+                  splashColor: Colors.green,
                 ),
               ],
             ),
