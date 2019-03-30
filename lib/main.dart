@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 import 'imu.dart';
 import 'joystick.dart';
+import 'speech.dart';
 import 'videoStream.dart';
 //import 'package:robot_control/speech.dart';
 
@@ -111,47 +112,22 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   //Navigation Bar
   int _selectedIndex = 0;
-  final String _prefix = "http://10.16.104.100:8080/";
 
-  AlertDialog _connectionError() =>
-      new AlertDialog(
-        title: new Text('Error'),
-        content: new Text('Connection Failed!'),
-        actions: <Widget>[
-          new MaterialButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: new Text('Cancel'),
-          ),
-          new MaterialButton(
-              onPressed: () {
-                setState(() {});
-                Navigator.pop(context);
-              },
-              child: new Text('OK')),
-        ],
-      );
-
-  void _error() {
-    if (true) {
-      showDialog(
-          context: context,
-          barrierDismissible: false,
-          builder: (BuildContext context) {
-            return _connectionError();
-          });
-    }
-  }
-
+  //final String _prefix = "http://10.16.104.100:8080/";
   //Posotranics
   //final String _prefix = "http://192.168.1.182:8080/";
-  //final String _prefix = "http://ros.local:8080/";
+  final String _prefix = "http://ros.local:8080/";
 
   var _linear = 0.0;
   var _angular = 0.0;
   var _lastLinear = 0.0;
   var _lastAngular = 0.0;
+
+  final HttpClient _httpClient = HttpClient();
+
+  _MyHomePageState() {
+    this._httpClient.connectionTimeout = Duration(seconds: 1);
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -176,7 +152,7 @@ class _MyHomePageState extends State<MyHomePage> {
       case 3:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => IMU()),
+          MaterialPageRoute(builder: (context) => Speech()),
         );
         break;
       case 4:
@@ -190,12 +166,29 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  void _makeAbsoluteRequest(String type, double val) async {
-    var uri = _prefix + type + "?val=" + val.toStringAsPrecision(1);
-    //print(uri);
+  void _error(String msg) {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return new AlertDialog(
+            title: new Text('Connection Failed'),
+            content: new Text(msg),
+            actions: <Widget>[
+              new MaterialButton(
+                  onPressed: () {
+                    //setState(() {});
+                    Navigator.of(context).pop();
+                  },
+                  child: new Text('OK')),
+            ],
+          );
+        });
+  }
 
+  void _makeRequest(String uri) async {
     try {
-      var request = await HttpClient().getUrl(Uri.parse(uri));
+      var request = await _httpClient.getUrl(Uri.parse(uri));
       var response = await request.close();
       await for (var contents in response.transform(Utf8Decoder())) {
         try {
@@ -212,36 +205,24 @@ class _MyHomePageState extends State<MyHomePage> {
       }
     }
     catch (e) {
-      _error();
       print(e);
+      _error(e.toString());
     }
   }
 
-  void _makeRelativeRequest(String direction) async {
-    var uri = Uri.parse(_prefix + direction);
-    //print(uri);
+  void _makeDualRequest(double linear, double angular) {
+    var uri = "${_prefix}dual?linear=${linear.toStringAsPrecision(1)}&angular=${angular.toStringAsPrecision(1)}";
+    _makeRequest(uri);
+  }
 
-    try {
-      var request = await HttpClient().getUrl(uri);
-      var response = await request.close();
-      await for (var contents in response.transform(Utf8Decoder())) {
-        try {
-          var json = jsonDecode(contents);
-          print(json);
-          setState(() {
-            _linear = json['linear'];
-            _angular = json['angular'];
-          });
-        }
-        on FormatException {
-          // Ignore
-        }
-      }
-    }
-    catch (e) {
-      _error();
-      print(e);
-    }
+  void _makeAbsoluteRequest(String type, double val) {
+    var uri = "$_prefix$type?val=${val.toStringAsPrecision(1)}";
+    _makeRequest(uri);
+  }
+
+  void _makeRelativeRequest(String direction) async {
+    var uri = "$_prefix$direction";
+    _makeRequest(uri);
   }
 
   @override
