@@ -9,9 +9,7 @@ import 'joystick.dart';
 import 'videoStream.dart';
 //import 'package:robot_control/speech.dart';
 
-
 void main() => runApp(MyApp());
-
 
 class MyApp extends StatelessWidget {
   @override
@@ -21,8 +19,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: SplashScreen()
-    );
+        home: SplashScreen());
   }
 }
 
@@ -32,7 +29,6 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
   @override
   void initState() {
     // TODO: implement initState
@@ -40,12 +36,10 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(
         Duration(seconds: 5),
             () =>
-            Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (BuildContext context) =>
-                    MyHomePage(title: 'Button Control'))));
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (BuildContext context) => MyHomePage(title: 'Button Control'))));
   }
 
-  @override
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,8 +62,7 @@ class _SplashScreenState extends State<SplashScreen> {
                               backgroundColor: Colors.deepOrange,
                               radius: 50.0,
                               child: Icon(
-                                const IconData(
-                                    0xe900, fontFamily: 'AthenianOwl'),
+                                const IconData(0xe900, fontFamily: 'AthenianOwl'),
                                 color: Colors.white,
                                 size: 50.0,
                               ),
@@ -77,16 +70,12 @@ class _SplashScreenState extends State<SplashScreen> {
                             Padding(
                               padding: EdgeInsets.only(top: 10.0),
                             ),
-                            Text("Best App Ever. Change my mind",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 24.0),
+                            Text(
+                              "Best App Ever. Change my mind.",
+                              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 24.0),
                             )
                           ],
-                        )
-                    )
-                ),
+                        ))),
                 Expanded(
                     flex: 1,
                     child: Column(
@@ -98,24 +87,19 @@ class _SplashScreenState extends State<SplashScreen> {
                         Padding(
                           padding: EdgeInsets.only(top: 20.0),
                         ),
-                        Text(
-                            "Loading...",
+                        Text("Loading...",
                             softWrap: true,
                             textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18.0)),
+                            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18.0)),
                       ],
-                    )
-                )
+                    ))
               ],
             )
           ],
-        )
-    );
+        ));
   }
 }
+
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
   final String title;
@@ -159,6 +143,7 @@ class _MyHomePageState extends State<MyHomePage> {
           });
     }
   }
+
   //Posotranics
   //final String _prefix = "http://192.168.1.182:8080/";
   //final String _prefix = "http://ros.local:8080/";
@@ -167,7 +152,6 @@ class _MyHomePageState extends State<MyHomePage> {
   var _angular = 0.0;
   var _lastLinear = 0.0;
   var _lastAngular = 0.0;
-
 
   void _onItemTapped(int index) {
     setState(() {
@@ -229,8 +213,6 @@ class _MyHomePageState extends State<MyHomePage> {
     }
     catch (e) {
       _error();
-
-
       print(e);
     }
   }
@@ -262,7 +244,6 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -289,7 +270,6 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             Container(
-
               margin: const EdgeInsets.only(bottom: 40.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -349,14 +329,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     margin: const EdgeInsets.only(left: 20.0, right: 20.0),
                     child: RaisedButton(
                       onPressed: () => _makeRelativeRequest('stop'),
-
                       child: const Text('Stop'),
                     ),
                   ),
                   RaisedButton(
                     onPressed: () => _makeRelativeRequest('right'),
                     child: const Text('Right'),
-
                   ),
                 ],
               ),
@@ -379,8 +357,7 @@ class _MyHomePageState extends State<MyHomePage> {
           BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Control')),
           BottomNavigationBarItem(icon: Icon(Icons.videogame_asset), title: Text('Joystick')),
           BottomNavigationBarItem(icon: Icon(Icons.launch), title: Text('IMU')),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.phone), title: Text('Speech')),
+          BottomNavigationBarItem(icon: Icon(Icons.phone), title: Text('Speech')),
           BottomNavigationBarItem(icon: Icon(Icons.voice_chat), title: Text('Video')),
         ],
         currentIndex: _selectedIndex,
