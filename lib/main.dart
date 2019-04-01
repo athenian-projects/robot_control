@@ -238,12 +238,33 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        //  backgroundColor: Colors.orangeAccent,
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
+              //  Container(
+              // Add box decoration
+              decoration: BoxDecoration(
+                // Box decoration takes a gradient
+                gradient: LinearGradient(
+                  // Where the linear gradient begins and ends
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                  // Add one stop for each color. Stops should increase from 0 to 1
+                  stops: [0.1, 0.5, 0.7, 0.9],
+                  colors: [
+                    // Colors are easy thanks to Flutter's Colors class.
+                    Colors.blue[800],
+                    Colors.blueAccent[700],
+                    Colors.lightBlue[600],
+                    Colors.lightBlueAccent[400],
+                  ],
+                ),
+              ),
+              //    ),
               margin: const EdgeInsets.only(bottom: 40.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -275,7 +296,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Slider(
-                    activeColor: Colors.indigoAccent,
+                    activeColor: Colors.purpleAccent,
                     label: "Linear",
                     min: -1,
                     max: 1,
@@ -290,7 +311,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     value: _linear,
                   ),
                   Slider(
-                    activeColor: Colors.indigoAccent,
+                    activeColor: Colors.purpleAccent,
                     label: "Angular",
                     min: -1,
                     max: 1,
@@ -351,9 +372,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ],
             ),
+
           ],
+
         ),
+
       ),
+
       drawer: Drawer(
         // Add a ListView to the drawer. This ensures the user can scroll
         // through the options in the Drawer if there isn't enough vertical
@@ -409,18 +434,24 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+
         type: BottomNavigationBarType.fixed,
         items: <BottomNavigationBarItem>[
+
           BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Control')),
           BottomNavigationBarItem(icon: Icon(Icons.videogame_asset), title: Text('Joystick')),
           BottomNavigationBarItem(icon: Icon(Icons.launch), title: Text('IMU')),
           BottomNavigationBarItem(icon: Icon(Icons.phone), title: Text('Speech')),
           BottomNavigationBarItem(icon: Icon(Icons.voice_chat), title: Text('Video')),
         ],
+
         currentIndex: _selectedIndex,
         fixedColor: Colors.deepOrange,
         onTap: _onItemTapped,
       ),
+
+      backgroundColor: Colors.blueGrey,
+
     );
   }
 }
