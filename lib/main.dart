@@ -388,10 +388,10 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             ),
             ListTile(
-              title: Text('ROSbot',
+              title: Text('Gazebo',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
               onTap: () {
-                _prefix = "http://10.16.104.100:8080/";
+                _prefix = "http://10.16.103.133:8080/";
                 // Then close the drawer
                 Navigator.pop(context);
               },
