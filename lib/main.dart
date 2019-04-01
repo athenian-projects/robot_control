@@ -126,7 +126,8 @@ class _MyHomePageState extends State<MyHomePage> {
   //final String _prefix = "http://192.168.1.182:8080/";  //Posotranics
   //final String _prefix = "http://ros.local:8080/";
   //final String _prefix = "http://turtle1:8080/";
-  final String _prefix = "http://paris.local:8080/";
+  //final String _prefix = "http://paris.local:8080/";
+  final String _prefix = "http://169.254.1.2:8080/";
 
   var _linear = 0.0;
   var _angular = 0.0;
@@ -220,7 +221,7 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  void _makeDualRequest(double linear, double angular) {
+  void makeDualRequest(double linear, double angular) {
     var uri = "${_prefix}dual?linear=${linear.toStringAsPrecision(1)}&angular=${angular.toStringAsPrecision(1)}";
     _makeRequest(uri);
   }
@@ -253,14 +254,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   Column(
                     children: <Widget>[
                       Text(
-                        'Linear          Angular',
+                        'Linear           Angular',
                         style: Theme
                             .of(context)
                             .textTheme
                             .display1,
                       ),
                       Text(
-                        ' $_linear                 ${_angular != 0.0 ? -1 * _angular : _angular}',
+                        '$_linear                  ${_angular != 0.0 ? -1 * _angular : _angular}',
                         style: Theme
                             .of(context)
                             .textTheme
@@ -309,14 +310,17 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                RaisedButton(
-                  onPressed: () => _makeRelativeRequest('forward'),
-                  child: const Text('Forward'),
-                ),
-              ],
+            Padding(
+              padding: const EdgeInsets.only(top: 38.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  RaisedButton(
+                    onPressed: () => _makeRelativeRequest('forward'),
+                    child: const Text('Forward'),
+                  ),
+                ],
+              ),
             ),
             Padding(
               padding: EdgeInsets.all(10.0),
