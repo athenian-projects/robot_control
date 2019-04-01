@@ -9,7 +9,7 @@ A Flutter app for controlling a ROS robot.
 - [ ] Add color gradient background
 - [x] Add bottom navigation
 - [x] Stub out voice control
-- [ ] Stub out IMU control
+- [x] Stub out IMU control
 - [ ] Settings page
 - [ ] http server dropdown on settings
 
