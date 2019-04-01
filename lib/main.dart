@@ -118,7 +118,7 @@ class _MyHomePageState extends State<MyHomePage> {
   var _lastLinear = 0.0;
   var _lastAngular = 0.0;
 
-  final String _prefix = "http://10.16.104.100:8080/";
+  String _prefix = "http://10.16.104.100:8080/";
 
   //final String _prefix = "http://10.16.104.100:8080/";
   //final String _prefix = "http://192.168.1.182:8080/";  //Posotranics
@@ -350,6 +350,60 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: const Text('Backward'),
                 ),
               ],
+            ),
+          ],
+        ),
+      ),
+      drawer: Drawer(
+        // Add a ListView to the drawer. This ensures the user can scroll
+        // through the options in the Drawer if there isn't enough vertical
+        // space to fit everything.
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              child: Text('Devices',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 50)),
+              decoration: BoxDecoration(
+                color: Colors.lightBlue,
+              ),
+            ),
+            ListTile(
+              title: Text('Magni',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+              onTap: () {
+                _prefix = "http://10.16.104.100:8080/";
+                // Then close the drawer
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('Turtlebot3',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+              onTap: () {
+                _prefix = "http://10.16.104.100:8080/";
+                // Then close the drawer
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('ROSbot',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+              onTap: () {
+                _prefix = "http://10.16.104.100:8080/";
+                // Then close the drawer
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('Posotronics Robot',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+              onTap: () {
+                _prefix = "http://192.168.1.182:8080/";
+                // Then close the drawer
+                Navigator.pop(context);
+              },
             ),
           ],
         ),
