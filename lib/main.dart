@@ -382,7 +382,7 @@ class _MyHomePageState extends State<MyHomePage> {
               title: Text('Turtlebot3',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
               onTap: () {
-                _prefix = "http://turtle1/";
+                _prefix = "http://turtle1.athenian.org/";
                 // Then close the drawer
                 Navigator.pop(context);
               },
