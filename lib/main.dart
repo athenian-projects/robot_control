@@ -4,8 +4,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
+import 'Joystick_Main.dart';
 import 'imu.dart';
-import 'joystick.dart';
 import 'videoStream.dart';
 //import 'package:robot_control/speech.dart';
 
@@ -180,7 +180,7 @@ class _MyHomePageState extends State<MyHomePage> {
       case 1:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => TestForm()),
+          MaterialPageRoute(builder: (context) => TouchTest()),
         );
         break;
       case 2:

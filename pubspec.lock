@@ -74,6 +74,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.4.0"
+  percent_indicator:
+    dependency: "direct main"
+    description:
+      name: percent_indicator
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.14"
   quiver:
     dependency: transitive
     description:
@@ -93,13 +100,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.5.4"
-  speech_recognition:
-    dependency: "direct main"
-    description:
-      name: speech_recognition
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.3.0+1"
   splashscreen:
     dependency: "direct main"
     description:
