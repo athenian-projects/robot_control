@@ -13,6 +13,14 @@ A Flutter app for controlling a ROS robot.
 - [ ] Settings page
 - [ ] http server dropdown on settings
 
+## Setup
+Launch a TurtleBot3 with:
+```bash
+# On TurtleBot3
+roslaunch turtlebot3_bringup turtlebot3_robot.launch
+```
+
+
 ## Dependencies
 
 Add these dependencies in the pubspec.yaml file.
