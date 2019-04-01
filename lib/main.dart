@@ -47,7 +47,6 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   @override
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Stack(
@@ -183,24 +182,28 @@ class _MyHomePageState extends State<MyHomePage> {
           context,
           MaterialPageRoute(builder: (context) => TouchTest()),
         );
+        _selectedIndex = 0;
         break;
       case 2:
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => IMU()),
         );
+        _selectedIndex = 0;
         break;
       case 3:
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => IMU()),
         );
+        _selectedIndex = 0;
         break;
       case 4:
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => VideoStream()),
         );
+        _selectedIndex = 0;
         break;
       default:
         throw StateError("You clicked a Button that doesnt exist!");
