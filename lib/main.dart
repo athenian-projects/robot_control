@@ -71,9 +71,18 @@ class _SplashScreenState extends State<SplashScreen> {
                             Padding(
                               padding: EdgeInsets.only(top: 10.0),
                             ),
-                            Text(
-                              "Best App Ever. Change my mind.",
-                              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 24.0),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Text(
+                                  "Best App Ever.",
+                                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 24.0),
+                                ),
+                                Text(
+                                  "Change my mind.",
+                                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 24.0),
+                                ),
+                              ],
                             )
                           ],
                         ))),
@@ -114,9 +123,10 @@ class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
 
   //final String _prefix = "http://10.16.104.100:8080/";
-  //Posotranics
-  //final String _prefix = "http://192.168.1.182:8080/";
-  final String _prefix = "http://ros.local:8080/";
+  //final String _prefix = "http://192.168.1.182:8080/";  //Posotranics
+  //final String _prefix = "http://ros.local:8080/";
+  //final String _prefix = "http://turtle1:8080/";
+  final String _prefix = "http://paris.local:8080/";
 
   var _linear = 0.0;
   var _angular = 0.0;
@@ -162,7 +172,7 @@ class _MyHomePageState extends State<MyHomePage> {
         );
         break;
       default:
-        throw StateError("You clicked a Button that doesnt exist!");
+        throw StateError("You clicked a Button that doesn't exist!");
     }
   }
 
@@ -240,12 +250,23 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text(
-                    'Linear: $_linear  Angular: ${_angular != 0.0 ? -1 * _angular : _angular}',
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .display1,
+                  Column(
+                    children: <Widget>[
+                      Text(
+                        'Linear          Angular',
+                        style: Theme
+                            .of(context)
+                            .textTheme
+                            .display1,
+                      ),
+                      Text(
+                        ' $_linear                 ${_angular != 0.0 ? -1 * _angular : _angular}',
+                        style: Theme
+                            .of(context)
+                            .textTheme
+                            .display1,
+                      ),
+                    ],
                   ),
                 ],
               ),
