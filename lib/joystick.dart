@@ -68,9 +68,7 @@ class _TestForm extends State<TestForm> {
   }
 
   Widget touchControl() {
-    new TouchPad(this.pageState, onChanged: onChanged);
-
-
+    return new TouchPad(this.pageState, onChanged: onChanged);
   }
 
   Widget gauge1() {
