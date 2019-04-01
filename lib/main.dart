@@ -72,7 +72,7 @@ class _SplashScreenState extends State<SplashScreen> {
                               padding: EdgeInsets.only(top: 10.0),
                             ),
                             Text(
-                              "Best App Ever. Change my mind",
+                              "Owl-CTRL",
                               style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 24.0),
                             )
                           ],
