@@ -24,7 +24,6 @@ class _TestForm extends State<TestForm> {
 
   }
 
-
   @override
   Widget build(BuildContext context) {
     return new Container(
@@ -61,7 +60,15 @@ class _TestForm extends State<TestForm> {
   }
 
   Widget touchControl() {
-    return new TouchPad(onChanged: onChanged);
+    return new Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          new Text ("hello"
+          ),
+          new TouchPad(onChanged: onChanged),
+        ]
+    );
+
   }
 
   Widget gauge1() {
@@ -102,7 +109,7 @@ class _TestForm extends State<TestForm> {
           new LinearPercentIndicator(
             width: 300.0,
             lineHeight: 20,
-            percent: (0 + 0.5),
+            percent: (0.5),
             animation: true,
             animateFromLastPercent: true,
             animationDuration: 300,
