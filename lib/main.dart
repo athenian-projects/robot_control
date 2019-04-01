@@ -134,12 +134,12 @@ class _MyHomePageState extends State<MyHomePage> {
         title: new Text('Error'),
         content: new Text('Connection Failed!'),
         actions: <Widget>[
-          new MaterialButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: new Text('Cancel'),
-          ),
+//          new MaterialButton(
+//            onPressed: () {
+//              Navigator.pop(context);
+//            },
+          // child: new Text('Cancel'),
+          //  ),
           new MaterialButton(
               onPressed: () {
                 setState(() {});
