@@ -74,12 +74,19 @@ class TouchPadState extends State<TouchPad> {
     }
   }
 
+//  void {
+//
+//}
+
   void _handlePanStart(DragStartDetails details) {
     onChanged(details.globalPosition);
   }
 
   void _handlePanEnd(DragEndDetails details) {
     print('end');
+    xPos = 0.0;
+    yPos = 0.0;
+
   }
 
   void _handlePanUpdate(DragUpdateDetails details) {
@@ -113,7 +120,7 @@ class TouchPadState extends State<TouchPad> {
  *
  */
 class TouchPadPainter extends CustomPainter {
-  static const markerRadius = 50.0;
+  static const markerRadius = 1.0;
 
   Offset position;
 
