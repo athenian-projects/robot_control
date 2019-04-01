@@ -6,12 +6,11 @@ import 'package:flutter/material.dart';
 
 import 'imu.dart';
 import 'joystick.dart';
+import 'speech.dart';
 import 'videoStream.dart';
 //import 'package:robot_control/speech.dart';
 
-
 void main() => runApp(MyApp());
-
 
 class MyApp extends StatelessWidget {
   @override
@@ -21,8 +20,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: SplashScreen()
-    );
+        home: SplashScreen());
   }
 }
 
@@ -32,7 +30,6 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
   @override
   void initState() {
     // TODO: implement initState
@@ -40,12 +37,10 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(
         Duration(seconds: 5),
             () =>
-            Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (BuildContext context) =>
-                    MyHomePage(title: 'Button Control'))));
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (BuildContext context) => MyHomePage(title: 'Button Control'))));
   }
 
-  @override
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,8 +63,7 @@ class _SplashScreenState extends State<SplashScreen> {
                               backgroundColor: Colors.deepOrange,
                               radius: 50.0,
                               child: Icon(
-                                const IconData(
-                                    0xe900, fontFamily: 'AthenianOwl'),
+                                const IconData(0xe900, fontFamily: 'AthenianOwl'),
                                 color: Colors.white,
                                 size: 50.0,
                               ),
@@ -77,16 +71,21 @@ class _SplashScreenState extends State<SplashScreen> {
                             Padding(
                               padding: EdgeInsets.only(top: 10.0),
                             ),
-                            Text("Best App Ever. Change my mind",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 24.0),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Text(
+                                  "Best App Ever.",
+                                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 24.0),
+                                ),
+                                Text(
+                                  "Change my mind.",
+                                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 24.0),
+                                ),
+                              ],
                             )
                           ],
-                        )
-                    )
-                ),
+                        ))),
                 Expanded(
                     flex: 1,
                     child: Column(
@@ -98,24 +97,19 @@ class _SplashScreenState extends State<SplashScreen> {
                         Padding(
                           padding: EdgeInsets.only(top: 20.0),
                         ),
-                        Text(
-                            "Loading...",
+                        Text("Loading...",
                             softWrap: true,
                             textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18.0)),
+                            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18.0)),
                       ],
-                    )
-                )
+                    ))
               ],
             )
           ],
-        )
-    );
+        ));
   }
 }
+
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
   final String title;
@@ -127,47 +121,24 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   //Navigation Bar
   int _selectedIndex = 0;
-  final String _prefix = "http://10.16.104.100:8080/";
 
-  AlertDialog _connectionError() =>
-      new AlertDialog(
-        title: new Text('Error'),
-        content: new Text('Connection Failed!'),
-        actions: <Widget>[
-          new MaterialButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: new Text('Cancel'),
-          ),
-          new MaterialButton(
-              onPressed: () {
-                setState(() {});
-                Navigator.pop(context);
-              },
-              child: new Text('OK')),
-        ],
-      );
-
-  void _error() {
-    if (true) {
-      showDialog(
-          context: context,
-          barrierDismissible: false,
-          builder: (BuildContext context) {
-            return _connectionError();
-          });
-    }
-  }
-  //Posotranics
-  //final String _prefix = "http://192.168.1.182:8080/";
+  //final String _prefix = "http://10.16.104.100:8080/";
+  //final String _prefix = "http://192.168.1.182:8080/";  //Posotranics
   //final String _prefix = "http://ros.local:8080/";
+  final String _prefix = "http://turtle1:8080/";
+  //final String _prefix = "http://paris.local:8080/";
+  //final String _prefix = "http://169.254.1.2:8080/";
 
   var _linear = 0.0;
   var _angular = 0.0;
   var _lastLinear = 0.0;
   var _lastAngular = 0.0;
 
+  final HttpClient _httpClient = HttpClient();
+
+  _MyHomePageState() {
+    this._httpClient.connectionTimeout = Duration(seconds: 1);
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -192,7 +163,7 @@ class _MyHomePageState extends State<MyHomePage> {
       case 3:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => IMU()),
+          MaterialPageRoute(builder: (context) => Speech()),
         );
         break;
       case 4:
@@ -202,16 +173,33 @@ class _MyHomePageState extends State<MyHomePage> {
         );
         break;
       default:
-        throw StateError("You clicked a Button that doesnt exist!");
+        throw StateError("You clicked a Button that doesn't exist!");
     }
   }
 
-  void _makeAbsoluteRequest(String type, double val) async {
-    var uri = _prefix + type + "?val=" + val.toStringAsPrecision(1);
-    //print(uri);
+  void _error(String msg) {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return new AlertDialog(
+            title: new Text('Connection Failed'),
+            content: new Text(msg),
+            actions: <Widget>[
+              new MaterialButton(
+                  onPressed: () {
+                    //setState(() {});
+                    Navigator.of(context).pop();
+                  },
+                  child: new Text('OK')),
+            ],
+          );
+        });
+  }
 
+  void _makeRequest(String uri) async {
     try {
-      var request = await HttpClient().getUrl(Uri.parse(uri));
+      var request = await _httpClient.getUrl(Uri.parse(uri));
       var response = await request.close();
       await for (var contents in response.transform(Utf8Decoder())) {
         try {
@@ -228,40 +216,25 @@ class _MyHomePageState extends State<MyHomePage> {
       }
     }
     catch (e) {
-      _error();
-
-
       print(e);
+      _error(e.toString());
     }
+  }
+
+  void makeDualRequest(double linear, double angular) {
+    var uri = "${_prefix}dual?linear=${linear.toStringAsPrecision(1)}&angular=${angular.toStringAsPrecision(1)}";
+    _makeRequest(uri);
+  }
+
+  void _makeAbsoluteRequest(String type, double val) {
+    var uri = "$_prefix$type?val=${val.toStringAsPrecision(1)}";
+    _makeRequest(uri);
   }
 
   void _makeRelativeRequest(String direction) async {
-    var uri = Uri.parse(_prefix + direction);
-    //print(uri);
-
-    try {
-      var request = await HttpClient().getUrl(uri);
-      var response = await request.close();
-      await for (var contents in response.transform(Utf8Decoder())) {
-        try {
-          var json = jsonDecode(contents);
-          print(json);
-          setState(() {
-            _linear = json['linear'];
-            _angular = json['angular'];
-          });
-        }
-        on FormatException {
-          // Ignore
-        }
-      }
-    }
-    catch (e) {
-      _error();
-      print(e);
-    }
+    var uri = "$_prefix$direction";
+    _makeRequest(uri);
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -278,18 +251,28 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text(
-                    'Linear: $_linear  Angular: ${_angular != 0.0 ? -1 * _angular : _angular}',
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .display1,
+                  Column(
+                    children: <Widget>[
+                      Text(
+                        'Linear           Angular',
+                        style: Theme
+                            .of(context)
+                            .textTheme
+                            .display1,
+                      ),
+                      Text(
+                        '$_linear                  ${_angular != 0.0 ? -1 * _angular : _angular}',
+                        style: Theme
+                            .of(context)
+                            .textTheme
+                            .display1,
+                      ),
+                    ],
                   ),
                 ],
               ),
             ),
             Container(
-
               margin: const EdgeInsets.only(bottom: 40.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -327,14 +310,17 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                RaisedButton(
-                  onPressed: () => _makeRelativeRequest('forward'),
-                  child: const Text('Forward'),
-                ),
-              ],
+            Padding(
+              padding: const EdgeInsets.only(top: 38.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  RaisedButton(
+                    onPressed: () => _makeRelativeRequest('forward'),
+                    child: const Text('Forward'),
+                  ),
+                ],
+              ),
             ),
             Padding(
               padding: EdgeInsets.all(10.0),
@@ -349,14 +335,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     margin: const EdgeInsets.only(left: 20.0, right: 20.0),
                     child: RaisedButton(
                       onPressed: () => _makeRelativeRequest('stop'),
-
                       child: const Text('Stop'),
                     ),
                   ),
                   RaisedButton(
                     onPressed: () => _makeRelativeRequest('right'),
                     child: const Text('Right'),
-
                   ),
                 ],
               ),
@@ -379,8 +363,7 @@ class _MyHomePageState extends State<MyHomePage> {
           BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Control')),
           BottomNavigationBarItem(icon: Icon(Icons.videogame_asset), title: Text('Joystick')),
           BottomNavigationBarItem(icon: Icon(Icons.launch), title: Text('IMU')),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.phone), title: Text('Speech')),
+          BottomNavigationBarItem(icon: Icon(Icons.phone), title: Text('Speech')),
           BottomNavigationBarItem(icon: Icon(Icons.voice_chat), title: Text('Video')),
         ],
         currentIndex: _selectedIndex,
