@@ -106,10 +106,10 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  MyHomePageState createState() => MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class MyHomePageState extends State<MyHomePage> {
   //Navigation Bar
   int _selectedIndex = 0;
 
@@ -129,7 +129,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final HttpClient _httpClient = HttpClient();
 
-  _MyHomePageState() {
+  MyHomePageState() {
     this._httpClient.connectionTimeout = Duration(seconds: 1);
   }
 
@@ -164,7 +164,7 @@ class _MyHomePageState extends State<MyHomePage> {
       case 1:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => TouchTest()),
+          MaterialPageRoute(builder: (context) => TouchTest(this)),
         );
         _selectedIndex = 0;
         break;

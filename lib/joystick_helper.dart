@@ -43,7 +43,7 @@ class TouchPadState extends State<TouchPad> {
 
     if (xFinal < 1) {
       xFinal = 0;
-      xPos = 0;
+      x = 0;
     } else {}
 
     if (yFinal > 9) {
@@ -52,7 +52,7 @@ class TouchPadState extends State<TouchPad> {
     } else {}
     if (yFinal < 1) {
       yFinal = 0;
-      yPos = 0;
+      y = 0;
     } else {}
 
     print('x:$xFinal:$width, y:$yFinal:$height');

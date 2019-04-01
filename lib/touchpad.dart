@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
+import 'main.dart';
 
 /**
  * Steteful widget
@@ -9,11 +10,12 @@ import 'package:flutter/rendering.dart';
 class TouchPad extends StatefulWidget {
 
   final ValueChanged<Offset> onChanged;
+  final MyHomePageState pageState;
 
-  const TouchPad({Key key, this.onChanged}) : super(key: key);
+  const TouchPad(this.pageState, {Key key, this.onChanged}) : super(key: key);
 
   @override
-  TouchPadState createState() => new TouchPadState();
+  TouchPadState createState() => new TouchPadState(this.pageState);
 }
 
 /**
@@ -24,6 +26,9 @@ class TouchPadState extends State<TouchPad> {
   double xPos = 0.0;
   double yPos = 0.0;
 
+  final MyHomePageState pageState;
+
+  TouchPadState(this.pageState);
   void onChanged(Offset offset) {
     final RenderBox referenceBox = context.findRenderObject();
     Offset position = referenceBox.globalToLocal(offset);
@@ -59,6 +64,7 @@ class TouchPadState extends State<TouchPad> {
     }
 
     print('x:$xFinal:$width, y:$yFinal:$height');
+    this.pageState.makeDualRequest(xFinal / 10.0, yFinal / 10.0);
 
     // Update state.
     setState(() {

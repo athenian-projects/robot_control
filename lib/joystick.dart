@@ -1,19 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
+import 'main.dart';
 import 'touchpad.dart';
 
 class TestForm extends StatefulWidget {
   static const String routeName = '/material/slider';
 
+  final MyHomePageState pageState;
+
+  TestForm(this.pageState);
   @override
-  _TestForm createState() => new _TestForm();
+  _TestForm createState() => new _TestForm(this.pageState);
 }
 
 class _TestForm extends State<TestForm> {
 
   double _valueSlider1 = 0.0;
   double _valueSlider2 = 0.0;
+
+  final MyHomePageState pageState;
+
+  _TestForm(this.pageState);
 
   /**
    * Touch change handler
@@ -60,14 +68,8 @@ class _TestForm extends State<TestForm> {
   }
 
   Widget touchControl() {
-    return new Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          new Text ("hello"
-          ),
-          new TouchPad(onChanged: onChanged),
-        ]
-    );
+    new TouchPad(this.pageState, onChanged: onChanged);
+
 
   }
 
