@@ -6,8 +6,10 @@ import 'main.dart';
 class TouchTest extends StatelessWidget {
 
   final MyHomePageState pageState;
+  int _selectedIndex = 1;
 
   TouchTest(this.pageState);
+
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +18,7 @@ class TouchTest extends StatelessWidget {
         title: const Text('Joystick'),
       ),
       body: new TestForm(this.pageState),
+
     );
   }
 }
