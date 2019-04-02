@@ -2,10 +2,12 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:animated_background/animated_background.dart';
 import 'package:flutter/material.dart';
 
 import 'Joystick_Main.dart';
 import 'imu.dart';
+import 'speech.dart';
 import 'videoStream.dart';
 //import 'package:robot_control/speech.dart';
 
@@ -109,7 +111,7 @@ class MyHomePage extends StatefulWidget {
   MyHomePageState createState() => MyHomePageState();
 }
 
-class MyHomePageState extends State<MyHomePage> {
+class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   //Navigation Bar
   int _selectedIndex = 0;
 
@@ -120,18 +122,12 @@ class MyHomePageState extends State<MyHomePage> {
 
   String _prefix = "http://10.16.104.100:8080/";
 
-  //final String _prefix = "http://10.16.104.100:8080/";
-  //final String _prefix = "http://192.168.1.182:8080/";  //Posotranics
-  //final String _prefix = "http://ros.local:8080/";
-  //final String _prefix = "http://turtle1:8080/";
-  //final String _prefix = "http://paris.local:8080/";
-  //final String _prefix = "http://169.254.1.2:8080/";
-
   final HttpClient _httpClient = HttpClient();
 
   MyHomePageState() {
     this._httpClient.connectionTimeout = Duration(seconds: 1);
   }
+
 
   void _error(String msg) {
     showDialog(
@@ -178,7 +174,7 @@ class MyHomePageState extends State<MyHomePage> {
       case 3:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => IMU()),
+          MaterialPageRoute(builder: (context) => Speech()),
         );
         _selectedIndex = 0;
         break;
@@ -240,7 +236,9 @@ class MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
         //  backgroundColor: Colors.orangeAccent,
       ),
-      body: Center(
+      body: AnimatedBackground(
+        behaviour: RandomParticleBehaviour(),
+        vsync: this,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -267,6 +265,7 @@ class MyHomePageState extends State<MyHomePage> {
               //    ),
               margin: const EdgeInsets.only(bottom: 40.0),
               child: Row(
+
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Column(
@@ -334,6 +333,7 @@ class MyHomePageState extends State<MyHomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   RaisedButton(
+                    splashColor: Colors.deepOrangeAccent,
                     onPressed: () => _makeRelativeRequest('forward'),
                     child: const Text('Forward'),
                   ),
@@ -346,6 +346,7 @@ class MyHomePageState extends State<MyHomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   RaisedButton(
+                    splashColor: Colors.deepOrangeAccent,
                     onPressed: () => _makeRelativeRequest('left'),
                     child: const Text('Left'),
                   ),
@@ -357,6 +358,7 @@ class MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                   RaisedButton(
+                    splashColor: Colors.deepOrangeAccent,
                     onPressed: () => _makeRelativeRequest('right'),
                     child: const Text('Right'),
                   ),
@@ -367,12 +369,21 @@ class MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 RaisedButton(
+                  splashColor: Colors.deepOrangeAccent,
                   onPressed: () => _makeRelativeRequest('backward'),
                   child: const Text('Backward'),
                 ),
               ],
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
 
+              children: [
+                Image.asset('assets/Logo2.png', width: 108.0, height: 72.0),
+                //width: 72.0, height: 48.0
+                // myLogoWidget()
+              ],
+            ),
           ],
 
         ),
@@ -388,8 +399,8 @@ class MyHomePageState extends State<MyHomePage> {
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              child: Text('Devices',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 50)),
+              child: Text('Device Management',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40)),
               decoration: BoxDecoration(
                 color: Colors.lightBlue,
               ),
@@ -438,7 +449,8 @@ class MyHomePageState extends State<MyHomePage> {
         type: BottomNavigationBarType.fixed,
         items: <BottomNavigationBarItem>[
 
-          BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Control')),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.home), title: Text('Control')),
           BottomNavigationBarItem(icon: Icon(Icons.videogame_asset), title: Text('Joystick')),
           BottomNavigationBarItem(icon: Icon(Icons.launch), title: Text('IMU')),
           BottomNavigationBarItem(icon: Icon(Icons.phone), title: Text('Speech')),
