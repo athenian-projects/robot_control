@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 import 'Joystick_Main.dart';
 import 'imu.dart';
+import 'speech.dart';
 import 'videoStream.dart';
 //import 'package:robot_control/speech.dart';
 
@@ -178,7 +179,7 @@ class MyHomePageState extends State<MyHomePage> {
       case 3:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => IMU()),
+          MaterialPageRoute(builder: (context) => Speech()),
         );
         _selectedIndex = 0;
         break;
