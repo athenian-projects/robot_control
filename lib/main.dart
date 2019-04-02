@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:animated_background/animated_background.dart';
 import 'package:flutter/material.dart';
 
 import 'Joystick_Main.dart';
@@ -236,9 +235,10 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         //  backgroundColor: Colors.orangeAccent,
       ),
 
-      body: AnimatedBackground(
-        behaviour: RandomParticleBehaviour(),
-        vsync: this,
+      body: Center(
+        //AnimatedBackground
+        //behaviour: RandomParticleBehaviour(),
+        //vsync: this,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
