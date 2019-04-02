@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:animated_background/animated_background.dart';
 import 'package:flutter/material.dart';
 
 import 'Joystick_Main.dart';
@@ -110,7 +111,7 @@ class MyHomePage extends StatefulWidget {
   MyHomePageState createState() => MyHomePageState();
 }
 
-class MyHomePageState extends State<MyHomePage> {
+class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   //Navigation Bar
   int _selectedIndex = 0;
 
@@ -235,7 +236,9 @@ class MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
         //  backgroundColor: Colors.orangeAccent,
       ),
-      body: Center(
+      body: AnimatedBackground(
+        behaviour: RandomParticleBehaviour(),
+        vsync: this,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
