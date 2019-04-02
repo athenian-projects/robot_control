@@ -128,7 +128,6 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     this._httpClient.connectionTimeout = Duration(seconds: 1);
   }
 
-
   void _error(String msg) {
     showDialog(
         context: context,
@@ -236,6 +235,7 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         title: Text(widget.title),
         //  backgroundColor: Colors.orangeAccent,
       ),
+
       body: AnimatedBackground(
         behaviour: RandomParticleBehaviour(),
         vsync: this,
@@ -381,6 +381,7 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
       ),
 
+
       drawer: Drawer(
         // Add a ListView to the drawer. This ensures the user can scroll
         // through the options in the Drawer if there isn't enough vertical
@@ -398,7 +399,10 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
             ),
             ListTile(
               title: Text('Magni',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+                  style: TextStyle(fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      color: Colors.blueGrey)),
+              trailing: Icon(Icons.keyboard_arrow_right),
               onTap: () {
                 _prefix = "http://10.16.104.100:8080/";
                 // Then close the drawer
@@ -406,8 +410,12 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
               },
             ),
             ListTile(
+
               title: Text('Turtlebot3',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+                  style: TextStyle(fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      color: Colors.blueGrey)),
+              trailing: Icon(Icons.keyboard_arrow_right),
               onTap: () {
                 _prefix = "http://turtle1.athenian.org:8080/";
                 // Then close the drawer
@@ -416,7 +424,10 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
             ),
             ListTile(
               title: Text('Gazebo',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+                  style: TextStyle(fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      color: Colors.blueGrey)),
+              trailing: Icon(Icons.keyboard_arrow_right),
               onTap: () {
                 _prefix = "http://10.16.103.133:8080/";
                 // Then close the drawer
@@ -425,7 +436,10 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
             ),
             ListTile(
               title: Text('Posotronics Robot',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+                  style: TextStyle(fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      color: Colors.blueGrey)),
+              trailing: Icon(Icons.keyboard_arrow_right),
               onTap: () {
                 _prefix = "http://192.168.1.182:8080/";
                 // Then close the drawer
@@ -440,7 +454,8 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         type: BottomNavigationBarType.fixed,
         items: <BottomNavigationBarItem>[
 
-          BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Control')),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.control_point), title: Text('Control')),
           BottomNavigationBarItem(icon: Icon(Icons.videogame_asset), title: Text('Joystick')),
           BottomNavigationBarItem(icon: Icon(Icons.launch), title: Text('IMU')),
           BottomNavigationBarItem(icon: Icon(Icons.phone), title: Text('Speech')),
