@@ -121,18 +121,12 @@ class MyHomePageState extends State<MyHomePage> {
 
   String _prefix = "http://10.16.104.100:8080/";
 
-  //final String _prefix = "http://10.16.104.100:8080/";
-  //final String _prefix = "http://192.168.1.182:8080/";  //Posotranics
-  //final String _prefix = "http://ros.local:8080/";
-  //final String _prefix = "http://turtle1:8080/";
-  //final String _prefix = "http://paris.local:8080/";
-  //final String _prefix = "http://169.254.1.2:8080/";
-
   final HttpClient _httpClient = HttpClient();
 
   MyHomePageState() {
     this._httpClient.connectionTimeout = Duration(seconds: 1);
   }
+
 
   void _error(String msg) {
     showDialog(
@@ -335,6 +329,7 @@ class MyHomePageState extends State<MyHomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   RaisedButton(
+                    splashColor: Colors.deepOrangeAccent,
                     onPressed: () => _makeRelativeRequest('forward'),
                     child: const Text('Forward'),
                   ),
@@ -347,6 +342,7 @@ class MyHomePageState extends State<MyHomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   RaisedButton(
+                    splashColor: Colors.deepOrangeAccent,
                     onPressed: () => _makeRelativeRequest('left'),
                     child: const Text('Left'),
                   ),
@@ -358,6 +354,7 @@ class MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                   RaisedButton(
+                    splashColor: Colors.deepOrangeAccent,
                     onPressed: () => _makeRelativeRequest('right'),
                     child: const Text('Right'),
                   ),
@@ -368,6 +365,7 @@ class MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 RaisedButton(
+                  splashColor: Colors.deepOrangeAccent,
                   onPressed: () => _makeRelativeRequest('backward'),
                   child: const Text('Backward'),
                 ),
