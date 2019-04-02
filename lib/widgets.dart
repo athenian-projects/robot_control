@@ -10,8 +10,10 @@ import 'package:flutter/material.dart';
 class myLogoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var imagesImage = new AssetImage('Imags/Logo1.png');
-    var image = new Image(image: imagesImage); // width: 72.0, height: 48.0)
+    var imagesImage = new AssetImage('assets/Logo2.png');
+    var image = new Image(image: imagesImage,
+        width: 108.0,
+        height: 72.0); // width: 72.0, height: 48.0)
     return Container(child: image); //
   }
 }

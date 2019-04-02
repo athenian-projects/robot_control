@@ -4,7 +4,6 @@ import 'dart:io';
 
 import 'package:animated_background/animated_background.dart';
 import 'package:flutter/material.dart';
-import 'package:robot_control/widgets.dart';
 
 import 'Joystick_Main.dart';
 import 'imu.dart';
@@ -380,9 +379,9 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
               mainAxisAlignment: MainAxisAlignment.center,
 
               children: [
-                Image.asset('assets/Logo2.png', width: 108.0, height: 72),
+                Image.asset('assets/Logo2.png', width: 108.0, height: 72.0),
                 //width: 72.0, height: 48.0
-                myLogoWidget()
+                // myLogoWidget()
               ],
             ),
           ],
