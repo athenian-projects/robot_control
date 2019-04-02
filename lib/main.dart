@@ -2,7 +2,9 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:animated_background/animated_background.dart';
 import 'package:flutter/material.dart';
+import 'package:robot_control/widgets.dart';
 
 import 'Joystick_Main.dart';
 import 'imu.dart';
@@ -127,6 +129,7 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     this._httpClient.connectionTimeout = Duration(seconds: 1);
   }
 
+
   void _error(String msg) {
     showDialog(
         context: context,
@@ -234,11 +237,9 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         title: Text(widget.title),
         //  backgroundColor: Colors.orangeAccent,
       ),
-
-      body: Center(
-        //AnimatedBackground
-        //behaviour: RandomParticleBehaviour(),
-        //vsync: this,
+      body: AnimatedBackground(
+        behaviour: RandomParticleBehaviour(),
+        vsync: this,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -265,6 +266,7 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
               //    ),
               margin: const EdgeInsets.only(bottom: 40.0),
               child: Row(
+
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Column(
@@ -374,13 +376,20 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                 ),
               ],
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
 
+              children: [
+                Image.asset('assets/Logo2.png', width: 108.0, height: 72),
+                //width: 72.0, height: 48.0
+                myLogoWidget()
+              ],
+            ),
           ],
 
         ),
 
       ),
-
 
       drawer: Drawer(
         // Add a ListView to the drawer. This ensures the user can scroll
@@ -399,10 +408,7 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
             ),
             ListTile(
               title: Text('Magni',
-                  style: TextStyle(fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      color: Colors.blueGrey)),
-              trailing: Icon(Icons.keyboard_arrow_right),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
               onTap: () {
                 _prefix = "http://10.16.104.100:8080/";
                 // Then close the drawer
@@ -410,12 +416,8 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
               },
             ),
             ListTile(
-
               title: Text('Turtlebot3',
-                  style: TextStyle(fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      color: Colors.blueGrey)),
-              trailing: Icon(Icons.keyboard_arrow_right),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
               onTap: () {
                 _prefix = "http://turtle1.athenian.org:8080/";
                 // Then close the drawer
@@ -424,10 +426,7 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
             ),
             ListTile(
               title: Text('Gazebo',
-                  style: TextStyle(fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      color: Colors.blueGrey)),
-              trailing: Icon(Icons.keyboard_arrow_right),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
               onTap: () {
                 _prefix = "http://10.16.103.133:8080/";
                 // Then close the drawer
@@ -436,10 +435,7 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
             ),
             ListTile(
               title: Text('Posotronics Robot',
-                  style: TextStyle(fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      color: Colors.blueGrey)),
-              trailing: Icon(Icons.keyboard_arrow_right),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
               onTap: () {
                 _prefix = "http://192.168.1.182:8080/";
                 // Then close the drawer
@@ -455,7 +451,7 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         items: <BottomNavigationBarItem>[
 
           BottomNavigationBarItem(
-              icon: Icon(Icons.control_point), title: Text('Control')),
+              icon: Icon(Icons.home), title: Text('Control')),
           BottomNavigationBarItem(icon: Icon(Icons.videogame_asset), title: Text('Joystick')),
           BottomNavigationBarItem(icon: Icon(Icons.launch), title: Text('IMU')),
           BottomNavigationBarItem(icon: Icon(Icons.phone), title: Text('Speech')),
