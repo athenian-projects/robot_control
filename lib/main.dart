@@ -390,8 +390,8 @@ class MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              child: Text('Devices',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 50)),
+              child: Text('Device Management',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40)),
               decoration: BoxDecoration(
                 color: Colors.lightBlue,
               ),
